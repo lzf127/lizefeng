@@ -6,6 +6,8 @@ import (
 
 func main() {
 	mux := http.NewServeMux()
+	files := http.FileServer(http.Dir("./"))
+	mux.Handle("/static/", http.StripPrefix("/static/", files))
 	mux.HandleFunc("/", index)
 	mux.HandleFunc("/tiao2", tiao2)
 	mux.HandleFunc("/tiao3", tiao3)
